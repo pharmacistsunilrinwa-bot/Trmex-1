@@ -1,0 +1,51 @@
+name: Build Flutter APK
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Set up Java JDK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle' # Caches gradle dependencies to speed up future runs
+
+      # 3. Set up Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true # Caches flutter dependencies to speed up future runs
+
+      # 4. Install dependencies for Flutter project
+      - name: Install Dependencies
+        run: flutter pub get
+        working-directory: frontend
+
+      # 5. Build release APK
+      - name: Build Release APK
+        run: flutter build apk --release
+        working-directory: frontend
+
+      # 6. Upload built APK as action artifact
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: frontend/build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
