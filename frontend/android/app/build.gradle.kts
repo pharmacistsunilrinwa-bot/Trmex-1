@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -15,7 +14,6 @@ android {
     }
 
     defaultConfig {
-        // Unique Application ID for the app
         applicationId = "com.trmex.personal_ai_assistant"
         minSdk = flutter.minSdkVersion
         targetSdk = 34
@@ -23,9 +21,18 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("upload-keystore.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("KEY_ALIAS")
+            keyPassword = System.getenv("KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
-            // Release build configuration
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
         }
         debug {
