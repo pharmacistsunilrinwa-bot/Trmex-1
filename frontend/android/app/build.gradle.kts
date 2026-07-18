@@ -25,8 +25,8 @@ android {
 
     buildTypes {
         release {
-            // Sign with debug key for development; replace with release signing config for production
-            signingConfig = signingConfigs.getByName("debug")
+            // Release build configuration
+            isMinifyEnabled = false
         }
         debug {
             debuggable = true
