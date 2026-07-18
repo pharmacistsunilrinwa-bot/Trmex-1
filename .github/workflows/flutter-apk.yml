@@ -9,7 +9,8 @@ jobs:
         run: |
           mkdir -p frontend/android/app
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > frontend/android/app/upload-keystore.jks
-          ls -l frontend/android/app/upload-keystore.jks
+          echo "File verification:"
+          ls -lh frontend/android/app/upload-keystore.jks
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
