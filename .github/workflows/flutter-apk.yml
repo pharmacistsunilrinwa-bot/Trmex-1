@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Decode Keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > frontend/android/app/upload-keystore.jks
       # 1. Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v4
