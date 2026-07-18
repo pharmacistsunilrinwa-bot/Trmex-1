@@ -26,7 +26,7 @@ android {
     buildTypes {
         release {
             // Release build configuration
-            isMinifyEnabled = false
+            isMinifyEnabled = true
         }
         debug {
         }
