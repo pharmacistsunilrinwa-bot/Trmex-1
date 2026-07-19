@@ -8,24 +8,11 @@ android {
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    defaultConfig {
-        applicationId = "com.trmex.personal_ai_assistant"
-        minSdk = flutter.minSdkVersion
-        targetSdk = 34
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
-    }
-
     signingConfigs {
         create("release") {
             storeFile = file("/home/runner/work/Trmex-1/Trmex-1/frontend/android/app/upload-keystore.jks")
             storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("KEY_ALIAS")
+            keyAlias = "key0"
             keyPassword = System.getenv("KEY_PASSWORD")
         }
     }
@@ -34,8 +21,6 @@ android {
         release {
             signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
-        }
-        debug {
         }
     }
 }
