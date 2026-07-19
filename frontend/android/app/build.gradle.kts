@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.trmex.personal_ai_assistant"
-    compileSdk = 34
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
